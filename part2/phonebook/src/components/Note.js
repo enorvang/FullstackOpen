@@ -1,10 +1,10 @@
 import React from "react"
 
-const Node = ({ note }) => {
+const Note = ({ note }) => {
     return (
         <div>
             {note.content}
         </div>
     )
 }
-export default Node
+export default Note
