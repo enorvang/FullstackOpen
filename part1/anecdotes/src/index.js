@@ -18,7 +18,13 @@ const App = (props) => {
     setVotes(copy)
   }
 
-  
+  const animals = [
+      { name: "Espen", species: "dog"},
+      { name: "Ingrid", species: "dog"},
+      { name: "Morten", species: "giraffe"},
+      { name: "Hanna", species: "apekatt"}
+  ]
+
 
   return (
     <div>
