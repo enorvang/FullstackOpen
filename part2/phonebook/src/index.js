@@ -2,29 +2,28 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
 
-const notes = [
+const people = [
   {
-    id: 1,
-    content: 'HTML is easy',
-    date: '2019-05-30T17:30:31.098Z',
-    important: true
+    name: "Espen Norvang",
+    number: "91863395"
   },
   {
-    id: 2,
-    content: 'Browser can execute only Javascript',
-    date: '2019-05-30T18:39:34.091Z',
-    important: false
+    name: "Morten Sund",
+    number: "12345678"
   },
   {
-    id: 3,
-    content: 'GET and POST are the most important methods of HTTP protocol',
-    date: '2019-05-30T19:20:14.298Z',
-    important: true
+    name: "Ingrid Thorkildsen",
+    number: "45200328"
+  },
+  {
+    name: "Jonas Solhaug",
+    number: "43243243"
   }
+
 ]
 
 ReactDOM.render(
-  <App notes={notes} />,
+  <App people={people}/>,
   document.getElementById('root')
 )
 

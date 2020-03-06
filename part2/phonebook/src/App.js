@@ -1,46 +1,61 @@
 import React, { useState } from 'react'
-import Note from './components/Note'
+import People from './components/People'
+import PersonForm from './components/PersonForm'
+import Filter from './components/Filter'
 
-const App = (props) => { 
-  const [notes, setNotes] = useState(props.notes)
-  const [newNote, setNewNote] = useState("a new note...")
 
-  const rows = () => notes.map(note =>
-    <Note
-      key={note.id}
-      note={note}
-    />
-  )
 
-  const addNote = (event) => {
+const App = (props) => {
+  const [ persons, setPersons] = useState(props.people) 
+  const [ newName, setNewName ] = useState('')
+  const [ newNumber, setNewNumber ] = useState('')
+  const [ filter, setFilter ] = useState('')
+
+
+  const handleFilterChange = (event) => {
+    setFilter(event.target.value)
+  }
+
+  const handleNameChange = (event) => {
+    setNewName(event.target.value)
+  }
+
+  const handleNumberChange = (event) => {
+    setNewNumber(event.target.value)
+  }
+
+  const displayPeople = (filter.length === 0)
+  ? persons
+  : persons.filter(p => p.name.toLowerCase().includes(filter.toLowerCase()))
+
+
+  const addNewEntry = (event) => {
     event.preventDefault()
-    console.log("button clicked", event.target)
-    const noteObject = {
-      content: newNote,
-      date: new Date().toISOString(),
-      important: Math.random() > 0.5,
-      id: notes.length + 1,
+    const personObject = {
+      name: newName,
+      number: newNumber
     }
 
-    setNotes(notes.concat(noteObject))
-    setNewNote("")
+    if(persons.some(p => p.name === newName)){
+      alert(`${newNumber} already exists`)
+    }else {
+      setPersons(persons.concat(personObject))
+      setNewName('')
+      setNewNumber('')
+    }
   }
-
-  const handleNoteChange = (event) => {
-    console.log(event.target.value)
-    setNewNote(event.target.value)
-  }
+  
 
   return (
     <div>
-      <h1>Notes</h1>
-      <ul>
-        {rows()}
-      </ul>
-      <form onSubmit={addNote}>
-        <input value={newNote} onChange={handleNoteChange}/>
-        <button type="submit">save</button>
-      </form>
+      <h2>Phonebook</h2>
+      <Filter filter={handleFilterChange}/>
+      <h3>Add new</h3>
+      <PersonForm addNewEntry={addNewEntry} newName={newName} handleNameChange={handleNameChange} 
+        newNumber={newNumber} handleNumberChange={handleNumberChange}/>
+       
+      <h2>Numbers</h2>
+      <People people={displayPeople} />
     </div>
   )
 }
