@@ -1,16 +1,23 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 import People from './components/People'
 import PersonForm from './components/PersonForm'
 import Filter from './components/Filter'
 
 
-
-const App = (props) => {
-  const [ persons, setPersons] = useState(props.people) 
+const App = () => {
+  const [ persons, setPersons] = useState([]) 
   const [ newName, setNewName ] = useState('')
   const [ newNumber, setNewNumber ] = useState('')
   const [ filter, setFilter ] = useState('')
 
+  useEffect(() => {
+    axios
+      .get('http://localhost:3001/persons')
+      .then(response => {
+        setPersons(response.data)
+      })
+  }, [])
 
   const handleFilterChange = (event) => {
     setFilter(event.target.value)
@@ -50,6 +57,7 @@ const App = (props) => {
     <div>
       <h2>Phonebook</h2>
       <Filter filter={handleFilterChange}/>
+
       <h3>Add new</h3>
       <PersonForm addNewEntry={addNewEntry} newName={newName} handleNameChange={handleNameChange} 
         newNumber={newNumber} handleNumberChange={handleNumberChange}/>
