@@ -8,8 +8,8 @@ const Content = (props) => {
     const rows = () => parts.map(part => 
         <Part key={part.id} name={part.name} exercises={part.exercises}/>
     )
-    const exercises = parts.map(p => p.exercises)
-    const sum = exercises.reduce((a, b) => a + b, 0)
+    
+    const sum = parts.reduce((a, b) => a + b.exercises, 0)
     
     return (
         <div>
