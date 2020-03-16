@@ -39,18 +39,26 @@ const App = () => {
 
   const displayPeople = () => peopleToDisplay.map((person, i) => {
     return (
-      <Person key={i} person={person} handleClick={() => deleteEntry(person.id)}/>
+      <Person key={i} person={person} handleClick={() => deleteEntry(person.id)} />
     )
   })
 
+  const notify = text => {
+    setNotificationMessage(text)
+    setTimeout(() => {
+      setNotificationMessage(null)
+    }, 5000)
+  }
+
   const addNewEntry = (event) => {
     event.preventDefault()
+
     const person = {
       name: newName,
       number: newNumber
     }
     if (people.some(p => p.number === newNumber)) {
-      alert(`${newNumber} already exists`)
+      notify(`Error, ${newNumber} already exists`)
 
     } else if (people.some(p => p.name === newName)) {
 
@@ -65,30 +73,28 @@ const App = () => {
           setPeople(people.concat(returnedPerson))
           setNewName('')
           setNewNumber('')
+          notify(`Added ${person.name}`)
         })
-        setNotificationMessage(`Added ${person.name}`)
-        setTimeout(() => {
-          setNotificationMessage(null)
-        }, 5000)
+
     }
   }
+
+
 
   const updateEntry = (person) => {
     const personToUpdate = people.find(p => p.name === person.name)
     const id = personToUpdate.id
-    const changedPerson = { ...personToUpdate, number: person.number}
- 
+    const changedPerson = { ...personToUpdate, number: person.number }
+
     peopleService
       .update(id, changedPerson)
       .then(returnedPerson => {
         setPeople(people.map(person => person.id !== id ? person : returnedPerson))
+        notify(`Updated ${changedPerson.name}`)
       })
-
-      setNotificationMessage(`Updated ${changedPerson.name}`)
-      setTimeout(() => {
-        setNotificationMessage(null)
-      }, 5000)
-
+      .catch(error => {
+        notify(`Error, ${personToUpdate.name} does not exist on the server`)
+      })
   }
 
   const deleteEntry = id => {
@@ -97,10 +103,10 @@ const App = () => {
       peopleService
         .deleteEntry(id)
         .then(returned => {
-          console.log(`Deleted ${personToDelete.name}`)
+          notify(`Deleted ${personToDelete.name}`)
         })
         .catch(error => {
-          alert(`${personToDelete.name} was already deleted`)
+          notify(`Error, ${personToDelete.name} does not exist on the server`)
         })
       setPeople(people.filter(p => p.id !== id))
     }

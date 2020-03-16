@@ -1,14 +1,14 @@
 {
   "people": [
     {
-      "name": "Ingrid Thorkildsen",
-      "number": "45200328",
-      "id": 2
-    },
-    {
       "name": "Espen Norvang",
       "number": "91863395",
-      "id": 5
+      "id": 1
+    },
+    {
+      "name": "Ingrid Th",
+      "number": "4520",
+      "id": 2
     }
   ]
 }
