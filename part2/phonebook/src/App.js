@@ -55,20 +55,7 @@ const App = () => {
     } else if (people.some(p => p.name === newName)) {
 
       if (window.confirm(`${newName} is already added to the phonebook. Do you want to replace replace the old phone number with a new one?`)) {
-        const personToUpdate = people.find(p => p.name === newName)
-        const id = personToUpdate.id
-        const changedPerson = { ...personToUpdate, number: newNumber }
-
-        peopleService
-          .update(id, changedPerson)
-          .then(returnedPerson => {
-            setPeople(people.map(person => person.id !== id ? person : returnedPerson))
-          })
-        
-        setNotificationMessage(`Updated ${changedPerson.name}`)
-        setTimeout(() => {
-          setNotificationMessage(null)
-        }, 5000)
+        updateEntry(person)
       }
 
     } else {
@@ -84,6 +71,24 @@ const App = () => {
           setNotificationMessage(null)
         }, 5000)
     }
+  }
+
+  const updateEntry = (person) => {
+    const personToUpdate = people.find(p => p.name === person.name)
+    const id = personToUpdate.id
+    const changedPerson = { ...personToUpdate, number: person.number}
+ 
+    peopleService
+      .update(id, changedPerson)
+      .then(returnedPerson => {
+        setPeople(people.map(person => person.id !== id ? person : returnedPerson))
+      })
+
+      setNotificationMessage(`Updated ${changedPerson.name}`)
+      setTimeout(() => {
+        setNotificationMessage(null)
+      }, 5000)
+
   }
 
   const deleteEntry = id => {
