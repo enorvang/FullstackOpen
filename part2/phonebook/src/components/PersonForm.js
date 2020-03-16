@@ -1,4 +1,4 @@
-import React from "react"
+import React from 'react'
 
 const PersonForm = ({ addNewEntry, newName, handleNameChange, newNumber, handleNumberChange }) => {
   return (
@@ -10,7 +10,7 @@ const PersonForm = ({ addNewEntry, newName, handleNameChange, newNumber, handleN
         number: <input value={newNumber} onChange={handleNumberChange} />
       </div>
       <div>
-        <button type="submit">add</button>
+        <button type='submit'>add</button>
       </div>
     </form>
   )

@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react"
-import People from "./components/People"
-import PersonForm from "./components/PersonForm"
-import Filter from "./components/Filter"
-import peopleService from "./services/peopleServices"
+import React, { useState, useEffect } from 'react'
+import People from './components/People'
+import PersonForm from './components/PersonForm'
+import Filter from './components/Filter'
+import peopleService from './services/peopleServices'
 
 
 const App = () => {
   const [people, setPeople] = useState([])
-  const [newName, setNewName] = useState("")
-  const [newNumber, setNewNumber] = useState("")
-  const [filter, setFilter] = useState("")
+  const [newName, setNewName] = useState('')
+  const [newNumber, setNewNumber] = useState('')
+  const [filter, setFilter] = useState('')
 
   useEffect(() => {
     peopleService
@@ -64,8 +64,8 @@ const App = () => {
         .create(person)
         .then(returnedPerson => {
           setPeople(people.concat(returnedPerson))
-          setNewName("")
-          setNewNumber("")
+          setNewName('')
+          setNewNumber('')
         })
         .catch(error => {
           console.log(error.response)
