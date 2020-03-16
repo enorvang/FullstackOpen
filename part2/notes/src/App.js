@@ -32,7 +32,6 @@ const App = () => {
                 alert(`the note ${note.content} was already deleted from server`)
                 setNotes(notes.filter(n => n.id !== id))
             })
-
     }
 
     const rows = () => notesToShow.map((note, i) =>
@@ -44,7 +43,6 @@ const App = () => {
     )
 
     const handleNoteChange = (event) => {
-        console.log(event.target.value)
         setNewNote(event.target.value)
     }
 

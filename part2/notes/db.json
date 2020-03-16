@@ -39,8 +39,20 @@
     {
       "content": "asdf",
       "date": "2020-03-16T09:24:54.932Z",
-      "important": false,
+      "important": true,
       "id": 7
+    },
+    {
+      "content": "Test",
+      "date": "2020-03-16T13:35:15.952Z",
+      "important": true,
+      "id": 8
+    },
+    {
+      "content": "Test2",
+      "date": "2020-03-16T13:35:39.101Z",
+      "important": false,
+      "id": 9
     }
   ]
 }
