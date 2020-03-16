@@ -1,24 +1,24 @@
 {
-    "people":[
-        {
-            "name": "Espen Norvang",
-            "number": "91863395"
-          },
-          {
-            "name": "Morten Sund",
-            "number": "12345678"
-          },
-          {
-              "name": "Hanna Brodersen",
-              "number": "87654321"
-          },
-          {
-            "name": "Ingrid Thorkildsen",
-            "number": "45200328"
-          },
-          {
-            "name": "Jonas Solhaug",
-            "number": "43243243"
-          }
-    ]
+  "people": [
+    {
+      "name": "Ingrid Thorkildsen",
+      "number": "45200328",
+      "id": 2
+    },
+    {
+      "name": "Morten Sund",
+      "number": "32132132",
+      "id": 4
+    },
+    {
+      "name": "Espen Norvang",
+      "number": "91863395",
+      "id": 5
+    },
+    {
+      "name": "Hanna Brodersen",
+      "number": "11223344",
+      "id": 6
+    }
+  ]
 }
