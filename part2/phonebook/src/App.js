@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import People from './components/People'
+import Person from './components/Person'
 import PersonForm from './components/PersonForm'
 import Filter from './components/Filter'
 import Notification from './components/Notification'
@@ -33,10 +33,15 @@ const App = () => {
     setNewNumber(event.target.value)
   }
 
-  const displayPeople = (filter.length === 0)
+  const peopleToDisplay = (filter.length === 0)
     ? people
     : people.filter(p => p.name.toLowerCase().includes(filter.toLowerCase()))
 
+  const displayPeople = () => peopleToDisplay.map((person, i) => {
+    return (
+      <Person key={i} person={person} handleClick={() => deleteEntry(person.id)}/>
+    )
+  })
 
   const addNewEntry = (event) => {
     event.preventDefault()
@@ -59,6 +64,11 @@ const App = () => {
           .then(returnedPerson => {
             setPeople(people.map(person => person.id !== id ? person : returnedPerson))
           })
+        
+        setNotificationMessage(`Updated ${changedPerson.name}`)
+        setTimeout(() => {
+          setNotificationMessage(null)
+        }, 5000)
       }
 
     } else {
@@ -69,10 +79,10 @@ const App = () => {
           setNewName('')
           setNewNumber('')
         })
-        .catch(error => {
-          console.log(error.response)
-
-        })
+        setNotificationMessage(`Added ${person.name}`)
+        setTimeout(() => {
+          setNotificationMessage(null)
+        }, 5000)
     }
   }
 
@@ -100,9 +110,8 @@ const App = () => {
       <h3>Add new</h3>
       <PersonForm addNewEntry={addNewEntry} newName={newName} handleNameChange={handleNameChange}
         newNumber={newNumber} handleNumberChange={handleNumberChange} />
-
       <h2>Numbers</h2>
-      <People people={displayPeople} deleteEntry={deleteEntry} />
+      {displayPeople()}
     </div>
   )
 }
