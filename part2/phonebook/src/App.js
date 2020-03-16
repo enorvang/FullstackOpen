@@ -42,30 +42,34 @@ const App = () => {
             name: newName,
             number: newNumber
         }
-
         if (people.some(p => p.name === newName)) {
             alert(`${newNumber} already exists`)
         } else {
-            setPeople(people.concat(personObject))
-            setNewName('')
-            setNewNumber('')
+
+            peopleService
+                .create(personObject)
+                .then(returnedPerson => {
+                    setPeople(people.concat(returnedPerson))
+                    setNewName("")
+                    setNewNumber("")
+                })
         }
     }
 
 
-    return (
-        <div>
-            <h2>Phonebook</h2>
-            <Filter filter={handleFilterChange} />
+        return (
+            <div>
+                <h2>Phonebook</h2>
+                <Filter filter={handleFilterChange} />
 
-            <h3>Add new</h3>
-            <PersonForm addNewEntry={addNewEntry} newName={newName} handleNameChange={handleNameChange}
-                newNumber={newNumber} handleNumberChange={handleNumberChange} />
+                <h3>Add new</h3>
+                <PersonForm addNewEntry={addNewEntry} newName={newName} handleNameChange={handleNameChange}
+                    newNumber={newNumber} handleNumberChange={handleNumberChange} />
 
-            <h2>Numbers</h2>
-            <People people={displayPeople} />
-        </div>
-    )
-}
+                <h2>Numbers</h2>
+                <People people={displayPeople} />
+            </div>
+        )
+    }
 
-export default App
+    export default App
